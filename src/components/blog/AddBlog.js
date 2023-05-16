@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import Navbar from "../navbar/navbar";
@@ -6,6 +7,8 @@ import Sidebar from "../sidebar/sidebar";
 import Login from "../blog/Login";
 import Footer from "../footer/footer";
 import { Link } from "react-router-dom";
+
+
 
 import { Route, Routes } from "react-router-dom";
 
@@ -31,9 +34,9 @@ const AddBlog = () => {
 
     useEffect(() => {
         if (pic) {
-          
+
             // fetch("/post-newblog", {
-                fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog",{
+            fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
@@ -49,7 +52,8 @@ const AddBlog = () => {
             }).then(res => res.json())
 
                 .then(output => console.log(output, "final output"))
-            navigate("/all-blogs")
+            window.location.href = "/all-blogs"
+
         }
     }, [pic])
 
@@ -59,30 +63,30 @@ const AddBlog = () => {
         e.preventDefault()
         const validationErrors = {};
         if (!blog_title) {
-          validationErrors.blog_title = "Please enter the blog title";
+            validationErrors.blog_title = "Please enter the blog title";
         }
         if (!blog_slug) {
-          validationErrors.blog_slug = "Please enter the blog slug";
+            validationErrors.blog_slug = "Please enter the blog slug";
         }
         if (!blog_summary) {
-          validationErrors.blog_summary = "Please enter the blog summary";
+            validationErrors.blog_summary = "Please enter the blog summary";
         }
         if (!blog_keyword) {
-          validationErrors.blog_keyword = "Please enter the blog keyword";
+            validationErrors.blog_keyword = "Please enter the blog keyword";
         }
         if (!image) {
-          validationErrors.image = "Please choose a picture";
+            validationErrors.image = "Please choose a picture";
         }
         if (!blog_content) {
-          validationErrors.blog_content = "Please enter the blog content";
+            validationErrors.blog_content = "Please enter the blog content";
         }
-    
+
         if (Object.keys(validationErrors).length > 0) {
-          setError(validationErrors);
-          return;
+            setError(validationErrors);
+            return;
         }
-    
-    
+
+
         const data = new FormData()
         data.append("file", image)
         data.append("upload_preset", "dellatecnica-data")
@@ -130,7 +134,7 @@ const AddBlog = () => {
                                                         <input type="text" className="form-control" id="basic-default-fullname" placeholder="The Title for the Blog Post"
                                                             name="blog_title"
                                                             onChange={(e) => setBlog_Title(e.target.value)} />
-                                                        {error  && <div className="form-text text-danger">Please Enter Blog Title</div>
+                                                        {error && <div className="form-text text-danger">Please Enter Blog Title</div>
                                                         }
                                                     </div>
 

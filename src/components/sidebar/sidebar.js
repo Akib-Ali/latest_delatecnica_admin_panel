@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { BiChevronRight} from "react-icons/bi"
+
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -17,9 +19,10 @@ const Sidebar = () => {
                      </span> 
                 </Link>
 
-                <a href="" className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-                    <i className="bx bx-chevron-left bx-sm align-middle"></i>
-                </a>
+                 <a href="" className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"> 
+                    <i className="bx bx-chevron-left bx-sm align-middle"></i> 
+                    {/* <BiChevronRight/> */}
+                 </a> 
             </div>
 
             <div className="menu-inner-shadow"></div>
@@ -38,7 +41,7 @@ const Sidebar = () => {
                 {/* <!-- Layouts --> */}
                 <li className="menu-item">
                     <span className="menu-link menu-toggle" onClick={handleClick}>
-                        <i className="menu-icon tf-icons bx bx-layout"></i>
+                        {/* <i className="menu-icon tf-icons bx bx-layout"></i> */}
                         <div data-i18n="Layouts">Blogs Management</div>
                     </span>
 
