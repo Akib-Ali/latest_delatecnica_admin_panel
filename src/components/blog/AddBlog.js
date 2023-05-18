@@ -35,8 +35,8 @@ const AddBlog = () => {
     useEffect(() => {
         if (pic) {
 
-            // fetch("/post-newblog", {
-            fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
+            //  fetch("/post-newblog", {
+             fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
@@ -134,7 +134,7 @@ const AddBlog = () => {
                                                         <input type="text" className="form-control" id="basic-default-fullname" placeholder="The Title for the Blog Post"
                                                             name="blog_title"
                                                             onChange={(e) => setBlog_Title(e.target.value)} />
-                                                        {error && <div className="form-text text-danger">Please Enter Blog Title</div>
+                                                        {error && !blog_title && <div className="form-text text-danger">Please Enter Blog Title</div>
                                                         }
                                                     </div>
 
