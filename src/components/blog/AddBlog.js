@@ -32,34 +32,9 @@ const AddBlog = () => {
 
 
 
-    useEffect(() => {
-        if (pic) {
-
-            //  fetch("/post-newblog", {
-             fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    blog_title,
-                    blog_slug,
-                    blog_summary,
-                    blog_keyword,
-                    pic,
-                    blog_content,
-                })
-            }).then(res => res.json())
-
-                .then(output => console.log(output, "final output"))
-            window.location.href = "/all-blogs"
-
-        }
-    }, [pic])
 
 
-
-    const handleSubmit = async (e) => {
+    const handleSubmit =async(e) => {
         e.preventDefault()
         const validationErrors = {};
         if (!blog_title) {
@@ -81,10 +56,10 @@ const AddBlog = () => {
             validationErrors.blog_content = "Please enter the blog content";
         }
 
-        if (Object.keys(validationErrors).length > 0) {
-            setError(validationErrors);
-            return;
-        }
+        // if (Object.keys(validationErrors).length > 0) {
+        //     setError(validationErrors);
+        //     return;
+        // }
 
 
         const data = new FormData()
@@ -98,13 +73,42 @@ const AddBlog = () => {
             .then(res => res.json())
             .then(data => {
                 setpic(data.url)
+                console.log(pic, "received fom use starte")
 
             }).catch(err => {
                 console.log(err)
             })
     }
 
-    // console.log(pic, "received fom use starte")
+     console.log(pic, "after function check image")
+
+
+     
+    useEffect(() => {
+        if (pic) {
+
+        //  fetch("/post-newblog", {
+               fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    blog_title,
+                    blog_slug,
+                    blog_summary,
+                    blog_keyword,
+                    pic,
+                    blog_content,
+                })
+            }).then(res => res.json())
+
+                .then(output => console.log(output, "final output"))
+            window.location.href = "/all-blogs"
+
+        }
+    }, [pic])
+
 
     return <>
         <div className="layout-wrapper layout-content-navbar">
