@@ -34,7 +34,7 @@ const AddBlog = () => {
 
 
 
-    const handleSubmit =async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const validationErrors = {};
         if (!blog_title) {
@@ -80,15 +80,15 @@ const AddBlog = () => {
             })
     }
 
-     console.log(pic, "after function check image")
+    console.log(pic, "after function check image")
 
 
-     
+
     useEffect(() => {
         if (pic) {
 
-        //  fetch("/post-newblog", {
-               fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
+            //  fetch("/post-newblog", {
+            fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
@@ -101,10 +101,17 @@ const AddBlog = () => {
                     pic,
                     blog_content,
                 })
-            }).then(res => res.json())
+            })
+            
+                .then(res => res.json())
+                setTimeout(() => {
+                    window.location.href = "/all-blogs"
+                    
+                }, 1000)
+    
 
-                .then(output => console.log(output, "final output"))
-            window.location.href = "/all-blogs"
+                // .then(output => console.log(output, "final output"))
+
 
         }
     }, [pic])
