@@ -11,7 +11,7 @@ const Sidebar = () => {
     return <>
         <aside id="layout-menu" className="layout-menu menu-vertical menu bg-menu-theme">
             <div className="app-brand demo">
-                <Link to="/" className="app-brand-link">
+                <Link to="/all-blogs" className="app-brand-link">
                     <span className="app-brand-logo demo">
                     </span>
                     <span className="app-brand-text fs-4 menu-text  ms-2"> 
@@ -31,7 +31,7 @@ const Sidebar = () => {
                 {/* Dashboard  */}
                 <li className="menu-item active">
                     {/* <a href="index.html" className="menu-link"> */}
-                    <Link to="/" className="menu-link">
+                    <Link to="/dashboard" className="menu-link">
                         <i className="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
                         </Link>

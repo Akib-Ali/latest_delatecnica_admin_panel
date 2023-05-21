@@ -8,14 +8,24 @@ import Footer from "../footer/footer";
 import AddBlog from "../blog/AddBlog";
 import EditBlog from "../blog/EditBlog";
 import ShowBlogs from "../blog/ShowBlogs";
+import PrivateRoute from "../privateroute";
 
 const Layout = () => {
     return <>
         <Routes>
-            <Route path="/" element={<ShowBlogs />}></Route>
-            <Route path="/create-blog" element={<AddBlog />}></Route>
-            <Route path="/edit-blog/:id" element={<EditBlog />}></Route>
-            <Route path="/all-blogs" element={<ShowBlogs />}></Route>
+
+            <Route element={<PrivateRoute />}>
+
+                <Route path="/dashboard" element={<ShowBlogs />}></Route>
+                <Route path="/create-blog" element={<AddBlog />}></Route>
+                <Route path="/edit-blog/:id" element={<EditBlog />}></Route>
+                <Route path="/all-blogs" element={<ShowBlogs />}></Route>
+
+            </Route>
+
+            <Route path="/" element={<Login />}></Route>
+
+
         </Routes>
 
     </>

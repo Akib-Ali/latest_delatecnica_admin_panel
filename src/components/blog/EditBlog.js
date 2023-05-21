@@ -66,11 +66,12 @@ const EditBlog = () => {
 useEffect(() => {
     if (pic) {
       
-        // fetch(`/blogupdate/${params.id}`, {
-            fetch(`https://wild-gold-bull-sock.cyclic.app/blogupdate/${params.id}`,{
+        //  fetch(`/blogupdate/${params.id}`, {
+             fetch(`https://wild-gold-bull-sock.cyclic.app/blogupdate/${params.id}`,{
             method: "post",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization:`bearer ${JSON.parse(localStorage.getItem("token"))}`
             },
             body: JSON.stringify({
                 blog_title,
@@ -89,24 +90,6 @@ useEffect(() => {
 
 
 
-    // const handleUpdate = async (e) => {
-    //     e.preventDefault()
-    //     var formData = new FormData()
-    //     formData.append('blog_title', blog_title)
-    //     formData.append('blog_slug', blog_slug)
-    //     formData.append('blog_summary', blog_summary)
-    //     formData.append('blog_keyword', blog_keyword)
-    //     formData.append('photo', image)
-    //     formData.append('blog_content', blog_content)
-    //     const config = {
-    //         headers: {
-
-    //             'Content-Type': 'multipart/form-data',
-
-    //         },
-    //     }
-    //     const res = await axios.post(`/blogupdate/${params.id}`, formData, config)
-    // }
 
 
     return <>

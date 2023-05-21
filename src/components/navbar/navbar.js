@@ -1,4 +1,15 @@
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+
+    const navigate = useNavigate()
+    const auth = localStorage.getItem("user")
+    let name = JSON.parse(auth).name
+
+    const logOut = () => {
+        localStorage.removeItem("user");
+        navigate("/")
+    }
+
     return <>
         <nav className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
             <div className="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -12,22 +23,30 @@ const Navbar = () => {
                 <div className="navbar-nav align-items-center">
                     <div className="nav-item d-flex align-items-center">
                         <i className="bx bx-search fs-4 lh-0"></i>
-                        <input type="text" className="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
+                        <input type="text" className="form-control border-0 shadow-none" placeholder="Searching" aria-label="Search..." />
                     </div>
                 </div>
                 {/* <!-- /Search --> */}
 
+
                 <ul className="navbar-nav flex-row align-items-center ms-auto">
+
                     {/* <!-- Place this tag where you want the button to render. --> */}
                     <li className="nav-item lh-1 me-3">
-                        <span></span>
+
+
+                        <span style={{ color: "green", fontWeight: "bold" }}>
+                            {`(${name})`}
+                            
+                            </span> &nbsp;&nbsp;
+                        <span className="align-middle" onClick={logOut}>Log Out</span>
                     </li>
 
                     {/* <!-- User --> */}
                     <li className="nav-item navbar-dropdown dropdown-user dropdown">
                         <a className="nav-link dropdown-toggle hide-arrow" href="" data-bs-toggle="dropdown">
                             <div className="avatar avatar-online">
-                                <img src="../assets/img/avatars/1.png" alt="" className="w-px-40 h-auto rounded-circle" />
+                                {/* <img src="../assets/img/avatars/1.png" alt="" className="w-px-40 h-auto rounded-circle" /> */}
                             </div>
                         </a>
                         <ul className="dropdown-menu dropdown-menu-end">

@@ -87,11 +87,13 @@ const AddBlog = () => {
     useEffect(() => {
         if (pic) {
 
-            //  fetch("/post-newblog", {
-            fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
+            // fetch("/post-newblog", {
+                 fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
                 method: "post",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
+
                 },
                 body: JSON.stringify({
                     blog_title,
@@ -102,15 +104,15 @@ const AddBlog = () => {
                     blog_content,
                 })
             })
-            
-                .then(res => res.json())
-                setTimeout(() => {
-                    window.location.href = "/all-blogs"
-                    
-                }, 1000)
-    
 
-                // .then(output => console.log(output, "final output"))
+                .then(res => res.json())
+            setTimeout(() => {
+                window.location.href = "/all-blogs"
+
+            }, 1000)
+
+
+            // .then(output => console.log(output, "final output"))
 
 
         }
