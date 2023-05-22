@@ -20,29 +20,22 @@ import ShowBlogs from "../blog/ShowBlogs";
 
 const AddBlog = () => {
 
-    const [blog_title, setBlog_Title] = useState("");
-    const [blog_slug, setBlog_Slug] = useState("");
-    const [blog_summary, setBlog_Summary] = useState("");
-    const [blog_keyword, setBlog_Keyword] = useState("");
-    const [image, setImage] = useState("");
-    const [pic, setpic] = useState("");
-    const [blog_content, setBlog_Content] = useState("");
-    const [error, setError] = useState(false);
-    const navigate = useNavigate();
+    const [blog_title, setBlog_Title] = useState('');
+    const [blog_slug, setBlog_Slug] = useState('');
+    const [blog_summary, setBlog_Summary] = useState('');
+    const [blog_keyword, setBlog_Keyword] = useState('')
+    const [image, setImage] = useState('')
+    const [pic, setpic] = useState('')
+    const [blog_content, setBlog_Content] = useState('')
+    const [error, setError] = useState(false)
+    const navigate = useNavigate()
 
-    const convertbase64 = (e) => {
-        var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onload = () => {
-            setImage(reader.result);
-        };
-        reader.onerror = (error) => {
-            console.log("error", error);
-        };
-    };
+
+
+
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const validationErrors = {};
         if (!blog_title) {
             validationErrors.blog_title = "Please enter the blog title";
@@ -63,23 +56,44 @@ const AddBlog = () => {
             validationErrors.blog_content = "Please enter the blog content";
         }
 
-        if (Object.keys(validationErrors).length > 0) {
-            setError(validationErrors);
-            return;
-        }
+        // if (Object.keys(validationErrors).length > 0) {
+        //     setError(validationErrors);
+        //     return;
+        // }
 
-        setpic(image);
-    };
+
+        const data = new FormData()
+        data.append("file", image)
+        data.append("upload_preset", "dellatecnica-data")
+        data.append("cloud_name", "dzuvrxlsy")
+        const res1 = await fetch("https://api.cloudinary.com/v1_1/dzuvrxlsy/image/upload", {
+            method: "post",
+            body: data
+        })
+            .then(res => res.json())
+            .then(data => {
+                setpic(data.url)
+                console.log(pic, "received fom use starte")
+
+            }).catch(err => {
+                console.log(err)
+            })
+    }
+
+    console.log(pic, "after function check image")
+
+
 
     useEffect(() => {
         if (pic) {
-            fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
+
+            // fetch("/post-newblog", {
+                 fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
-                    authorization: `bearer ${JSON.parse(
-                        localStorage.getItem("token")
-                    )}`,
+                    authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
+
                 },
                 body: JSON.stringify({
                     blog_title,
@@ -88,25 +102,21 @@ const AddBlog = () => {
                     blog_keyword,
                     pic,
                     blog_content,
-                }),
+                })
             })
-                .then((res) => res.json())
-                .then((data) => {
-                    // Clear input fields on successful post
-                    setBlog_Title("");
-                    setBlog_Slug("");
-                    setBlog_Summary("");
-                    setBlog_Keyword("");
-                    setImage("");
-                    setBlog_Content("");
-                    setTimeout(() => {
-                        navigate("/all-blogs");
-                    }, 3000);
-                });
-        }
-    }, [pic, navigate]);
 
-    console.log(pic, "received from useState pic");
+                .then(res => res.json())
+            setTimeout(() => {
+                window.location.href = "/all-blogs"
+
+            }, 1000)
+
+
+            // .then(output => console.log(output, "final output"))
+
+
+        }
+    }, [pic])
 
 
     return <>
@@ -183,8 +193,7 @@ const AddBlog = () => {
                                                 <div className="input-group input-group-merge">
                                                     <input type="file" id="basic-default-email" className="form-control" placeholder="Short Summary,Used as the Meta Description" aria-label="john.doe" aria-describedby="basic-default-email2"
                                                         name="photo"
-                                                        // onChange={(e) => setImage(e.target.files[0])}
-                                                        onChange={convertbase64}
+                                                        onChange={(e) => setImage(e.target.files[0])}
                                                     />
                                                 </div>
                                                 {error && !image && <div className="form-text text-danger">Please Choose a Picture</div>
