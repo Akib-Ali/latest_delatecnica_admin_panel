@@ -108,10 +108,10 @@ const AddBlog = () => {
             })
 
                 .then(res => res.json())
-            // setTimeout(() => {
+            setTimeout(() => {
                 window.location.href = "/all-blogs"
 
-            // }, 1000)
+             }, 2000)
 
 
             // .then(output => console.log(output, "final output"))
