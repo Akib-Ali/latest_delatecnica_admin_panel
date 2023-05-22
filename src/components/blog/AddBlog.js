@@ -32,6 +32,22 @@ const AddBlog = () => {
 
 
 
+      const convertbase64=(e)=>{
+        // console.log(e.target.files[0], "received image convert base 64")
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0])
+        reader.onload=()=>{
+            setImage(reader.result)
+            //  console.log(reader.result , "convert base 64 my image")
+        }
+        reader.onerror= error=>{
+            console.log("error", error)
+        }
+
+      }
+
+    //    console.log(image , "received concert")
+
 
 
     const handleSubmit = async (e) => {
@@ -56,38 +72,24 @@ const AddBlog = () => {
             validationErrors.blog_content = "Please enter the blog content";
         }
 
-        // if (Object.keys(validationErrors).length > 0) {
-        //     setError(validationErrors);
-        //     return;
-        // }
+         
+        if (Object.keys(validationErrors).length > 0) {
+            setError(validationErrors);
+            return;
+        }
+        
+        setpic(image)
 
-
-        const data = new FormData()
-        data.append("file", image)
-        data.append("upload_preset", "dellatecnica-data")
-        data.append("cloud_name", "dzuvrxlsy")
-        const res1 = await fetch("https://api.cloudinary.com/v1_1/dzuvrxlsy/image/upload", {
-            method: "post",
-            body: data
-        })
-            .then(res => res.json())
-            .then(data => {
-                setpic(data.url)
-                console.log(pic, "received fom use starte")
-
-            }).catch(err => {
-                console.log(err)
-            })
     }
 
-    console.log(pic, "after function check image")
+    
 
 
 
     useEffect(() => {
         if (pic) {
 
-            // fetch("/post-newblog", {
+            //  fetch("/post-newblog", 
                  fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
                 method: "post",
                 headers: {
@@ -118,6 +120,7 @@ const AddBlog = () => {
         }
     }, [pic])
 
+      console.log(pic , "receiveed from usestate pic")
 
     return <>
         <div className="layout-wrapper layout-content-navbar">
@@ -193,7 +196,8 @@ const AddBlog = () => {
                                                 <div className="input-group input-group-merge">
                                                     <input type="file" id="basic-default-email" className="form-control" placeholder="Short Summary,Used as the Meta Description" aria-label="john.doe" aria-describedby="basic-default-email2"
                                                         name="photo"
-                                                        onChange={(e) => setImage(e.target.files[0])}
+                                                        // onChange={(e) => setImage(e.target.files[0])}
+                                                        onChange={convertbase64}
                                                     />
                                                 </div>
                                                 {error && !image && <div className="form-text text-danger">Please Choose a Picture</div>
