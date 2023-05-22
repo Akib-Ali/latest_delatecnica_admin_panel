@@ -20,38 +20,29 @@ import ShowBlogs from "../blog/ShowBlogs";
 
 const AddBlog = () => {
 
-    const [blog_title, setBlog_Title] = useState('');
-    const [blog_slug, setBlog_Slug] = useState('');
-    const [blog_summary, setBlog_Summary] = useState('');
-    const [blog_keyword, setBlog_Keyword] = useState('')
-    const [image, setImage] = useState('')
-    const [pic, setpic] = useState('')
-    const [blog_content, setBlog_Content] = useState('')
-    const [error, setError] = useState(false)
-    const navigate = useNavigate()
+    const [blog_title, setBlog_Title] = useState("");
+    const [blog_slug, setBlog_Slug] = useState("");
+    const [blog_summary, setBlog_Summary] = useState("");
+    const [blog_keyword, setBlog_Keyword] = useState("");
+    const [image, setImage] = useState("");
+    const [pic, setpic] = useState("");
+    const [blog_content, setBlog_Content] = useState("");
+    const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
-
-
-      const convertbase64=(e)=>{
-        // console.log(e.target.files[0], "received image convert base 64")
+    const convertbase64 = (e) => {
         var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0])
-        reader.onload=()=>{
-            setImage(reader.result)
-            //  console.log(reader.result , "convert base 64 my image")
-        }
-        reader.onerror= error=>{
-            console.log("error", error)
-        }
-
-      }
-
-    //    console.log(image , "received concert")
-
-
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = () => {
+            setImage(reader.result);
+        };
+        reader.onerror = (error) => {
+            console.log("error", error);
+        };
+    };
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const validationErrors = {};
         if (!blog_title) {
             validationErrors.blog_title = "Please enter the blog title";
@@ -72,30 +63,23 @@ const AddBlog = () => {
             validationErrors.blog_content = "Please enter the blog content";
         }
 
-         
         if (Object.keys(validationErrors).length > 0) {
             setError(validationErrors);
             return;
         }
-        
-        setpic(image)
 
-    }
-
-    
-
-
+        setpic(image);
+    };
 
     useEffect(() => {
         if (pic) {
-
-            //  fetch("/post-newblog", 
-                 fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
+            fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
-                    authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
-
+                    authorization: `bearer ${JSON.parse(
+                        localStorage.getItem("token")
+                    )}`,
                 },
                 body: JSON.stringify({
                     blog_title,
@@ -104,23 +88,26 @@ const AddBlog = () => {
                     blog_keyword,
                     pic,
                     blog_content,
-                })
+                }),
             })
-
-                .then(res => res.json())
-            setTimeout(() => {
-                window.location.href = "/all-blogs"
-
-             }, 2000)
-
-
-            // .then(output => console.log(output, "final output"))
-
-
+                .then((res) => res.json())
+                .then((data) => {
+                    // Clear input fields on successful post
+                    setBlog_Title("");
+                    setBlog_Slug("");
+                    setBlog_Summary("");
+                    setBlog_Keyword("");
+                    setImage("");
+                    setBlog_Content("");
+                    setTimeout(() => {
+                        navigate("/all-blogs");
+                    }, 3000);
+                });
         }
-    }, [pic])
+    }, [pic, navigate]);
 
-      console.log(pic , "receiveed from usestate pic")
+    console.log(pic, "received from useState pic");
+
 
     return <>
         <div className="layout-wrapper layout-content-navbar">
