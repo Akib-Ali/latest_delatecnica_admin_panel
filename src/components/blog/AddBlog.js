@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+
+
+
+import { useEffect, useState, useRef } from "react";
 
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
@@ -7,6 +10,8 @@ import Sidebar from "../sidebar/sidebar";
 import Login from "../blog/Login";
 import Footer from "../footer/footer";
 import { Link } from "react-router-dom";
+import JoditEditor from 'jodit-react';
+
 
 
 
@@ -27,8 +32,11 @@ const AddBlog = () => {
     const [image, setImage] = useState('')
     const [pic, setpic] = useState('')
     const [blog_content, setBlog_Content] = useState('')
+    const [content, setContent] = useState('');
     const [error, setError] = useState(false)
     const navigate = useNavigate()
+
+    const editor = useRef(null);
 
 
 
@@ -88,7 +96,7 @@ const AddBlog = () => {
         if (pic) {
 
             // fetch("/post-newblog", {
-                 fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
+            fetch("https://wild-gold-bull-sock.cyclic.app/post-newblog", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -202,12 +210,21 @@ const AddBlog = () => {
 
                                             <div className="mb-3">
                                                 <label className="form-label" htmlFor="basic-default-message">Content</label>
-                                                <textarea id="basic-default-message" className="form-control"
+                                                {/* <textarea id="basic-default-message" className="form-control"
                                                     name="blog_content"
                                                     onChange={(e) => setBlog_Content(e.target.value)}
+                                                /> */}
+                                                <JoditEditor
+                                                    ref={editor}
+                                                    value={blog_content}
+                                                    onChange={newContent => setBlog_Content(newContent)}
+
+
                                                 />
-                                                {error && !blog_content && <div className="form-text text-danger">Please Enter Blog Content</div>
-                                                }
+
+
+                                                {/* {error && !blog_content && <div className="form-text text-danger">Please Enter Blog Content</div>
+                                                } */}
                                             </div>
                                             <button type="submit" className="btn btn-primary"
                                                 onClick={handleSubmit}

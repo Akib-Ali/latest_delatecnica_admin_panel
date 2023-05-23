@@ -49,10 +49,12 @@ const Login = () => {
                             <div className="card" style={{ borderRradius: "1rem" }}>
                                 <div className="row g-0">
                                     <div className="col-md-6 col-lg-5 d-none d-md-block">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                                        {/* <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
                                             alt="login form" className="img-fluid"
                                             style={{ borderRadius: "1rem 0 0 1rem" }}
-                                        />
+                                        /> */}
+                                        <img src="/images/delatecnica_logo.png" className="img-fluid"
+                                            style={{ borderRadius: "1rem 0 0 1rem" }}/>
                                     </div>
                                     <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                         <div className="card-body p-4 p-lg-5 text-black">
@@ -74,6 +76,7 @@ const Login = () => {
                                                     <input type="email" id="form2Example17" className="form-control form-control-lg"
                                                         value={email}
                                                         onChange={(e) => setEmail(e.target.value)}
+                                                        autoComplete="off"
                                                     />
                                                     <label className="form-label"
 
@@ -97,12 +100,12 @@ const Login = () => {
                                                     {/* </Link> */}
                                                 </div>
 
-                                                <a className="small text-muted" href="#!">Forgot password?</a>
+                                                {/* <a className="small text-muted" href="#!">Forgot password?</a>
                                                 <p className="mb-5 pb-lg-2"
                                                     style={{ color: "#393f81" }}>Don't have an account? <Link to="/"
                                                         style={{ color: "#393f81" }}>Register here</Link></p>
                                                 <a href="#!" className="small text-muted">Terms of use.</a>
-                                                <a href="#!" className="small text-muted">Privacy policy</a>
+                                                <a href="#!" className="small text-muted">Privacy policy</a> */}
                                             </form>
 
                                         </div>

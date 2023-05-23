@@ -179,7 +179,7 @@ const DeleteModal = (props) => {
             <button className="btn btn-sm btn-danger" onClick={onOpenModal}>Delete</button>
             <Modal open={open} center onClose={onCloseModal}>
                 <br></br>
-                <h2>Are you sure you want to delete?'</h2>
+                <h2>Are you sure you want to delete?</h2>
                 <button className="btn btn-sm btn-danger" onClick={handleDelete}>Yes</button>
                 <button className="btn btn-sm btn-primary" onClick={onCloseModal}>No</button>
             </Modal>
