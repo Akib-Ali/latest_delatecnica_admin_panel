@@ -72,9 +72,9 @@ const AddBlog = () => {
 
         const data = new FormData()
         data.append("file", image)
-        data.append("upload_preset", "dellatecnica-data")
-        data.append("cloud_name", "dzuvrxlsy")
-        const res1 = await fetch("https://api.cloudinary.com/v1_1/dzuvrxlsy/image/upload", {
+        data.append("upload_preset", "dellatecnica-images")
+        data.append("cloud_name", "dx3wxmbqf")
+        const res1 = await fetch("https://api.cloudinary.com/v1_1/dx3wxmbqf/image/upload", {
             method: "post",
             body: data
         })
