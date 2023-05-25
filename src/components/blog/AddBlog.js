@@ -197,7 +197,7 @@ const AddBlog = () => {
                                                 }
                                             </div>
                                             <div className="mb-3">
-                                                <label className="form-label" htmlFor="basic-default-email">Thumbnail</label>
+                                                <label className="form-label" htmlFor="basic-default-email">Thumbnail(Preferred Size: 1440X810)</label>
                                                 <div className="input-group input-group-merge">
                                                     <input type="file" id="basic-default-email" className="form-control" placeholder="Short Summary,Used as the Meta Description" aria-label="john.doe" aria-describedby="basic-default-email2"
                                                         name="photo"
