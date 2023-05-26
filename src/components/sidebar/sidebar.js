@@ -56,6 +56,11 @@ const Sidebar = () => {
                                 <div data-i18n="Without navbar">Add New Blog</div>
                             </Link>
                         </li>
+                        <li className="menu-item">
+                            <Link to="/comments" className="menu-link">
+                                <div data-i18n="Without navbar">All Comments</div>
+                            </Link>
+                        </li>
                     </ul>
 
                     <style>

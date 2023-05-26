@@ -9,6 +9,7 @@ import AddBlog from "../blog/AddBlog";
 import EditBlog from "../blog/EditBlog";
 import ShowBlogs from "../blog/ShowBlogs";
 import PrivateRoute from "../privateroute";
+import Comment from "../blog/comment";
 
 const Layout = () => {
     return <>
@@ -20,6 +21,7 @@ const Layout = () => {
                 <Route path="/create-blog" element={<AddBlog />}></Route>
                 <Route path="/edit-blog/:id" element={<EditBlog />}></Route>
                 <Route path="/all-blogs" element={<ShowBlogs />}></Route>
+                <Route path="/comments" element={<Comment/>}></Route>
 
             </Route>
 
