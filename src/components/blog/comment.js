@@ -12,7 +12,8 @@ const Comment = () => {
 
     const [isloading, setLoading] = useState(false)
     const [data, setData] = useState([])
-    const [admin_approved, setadmin_Approved] = useState("yes")
+    const [admin_approved, setadmin_Approved] = useState(null)
+
     const [error, setError] = useState(false)
 
 
@@ -38,30 +39,42 @@ const Comment = () => {
 
     }
 
-
-    console.log(data, "received comments from useState")
+  console.log(data, "received comments from useState")
 
 
 
     const handleApprovedComment = async (id) => {
-        // alert(props.elem.id)
-        console.log(id, "sucessful button click")
-        const result = await fetch(`https://wild-gold-bull-sock.cyclic.app/update-comment/${id}`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                admin_approved
-            }),
-        
+        const newStatus = data.find(comment => comment._id === id).admin_approved === "yes" ? "no" : "yes";
 
-        }).then(res => res.json())
-        window.location.reload()
+        try {
+            await axios.post(`https://wild-gold-bull-sock.cyclic.app/update-comment/${id}`, {
+                admin_approved: newStatus,
+            });
+            window.location.reload();
+        } catch (error) {
+            console.error(error);
+        }
+    
 
 
 
     }
+
+
+    const handleReject = async (id) => {
+        
+      const newStatus = data.find(comment => comment._id === id).admin_approved === "yes" ? "no" : "yes";
+
+        try {
+            await axios.post(`https://wild-gold-bull-sock.cyclic.app/update-comment/${id}`, {
+                admin_approved: newStatus,
+            });
+            window.location.reload();
+        } catch (error) {
+            console.error(error);
+        }
+    
+ }
 
 
 
@@ -130,11 +143,15 @@ const Comment = () => {
 
                                                                 <td>
                                                                     {elem.admin_approved === "yes" ? (
-                                                                        <span className="badge bg-label-primary me-1">Active</span>
+                                                                        <span className="badge bg-success me-1"
+                                                                            onClick={() => handleReject(elem._id)} style={{cursor: "pointer"}}>Active</span>
                                                                     ) : (
                                                                         <span className="badge bg-primary text-white me-1" onClick={() => handleApprovedComment(elem._id)}>Inactive</span>
                                                                     )}
+
                                                                 </td>
+
+
 
                                                                 <td>
                                                                     <DeleteModal
